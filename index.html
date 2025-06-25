@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鹿児島から想いを届ける - クラウドファンディング支援</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'clear-navy': '#003366',
+            'gold': '#C4A261',
+            'gold-dark': '#A48447',
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-navy: #1B2838;
+      --color-ivory: #F8F8F6;
+      --color-lightgray: #EEF1F2;
+      --color-gold: #C4A261;
+      --color-primary: #C4A261; /* プライマリーカラーをゴールドに */
+    }
+    
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #333;
+      background-color: var(--color-ivory);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.4;
+    }
+    
+    h1 { font-size: 52px; }
+    h2 { font-size: 36px; margin-bottom: 1.5rem; }
+    h3 { font-size: 26px; margin-bottom: 1.25rem; }
+    
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      font-weight: 700;
+      border-radius: 9999px;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .btn-primary {
+      background-color: var(--color-gold);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+    }
+    
+    .btn-primary:hover {
+      background-color: #b39157;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(196, 162, 97, 0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .section {
+      padding: 5rem 0;
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--color-gold);
+    }
+    
+    .hero {
+      background: url('images/hero-image.png') no-repeat center/cover;
+      color: white;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    
+    .hero-text {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .icon-wrapper {
+      width: 80px;
+      height: 80px;
+      background: rgba(196, 162, 97, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: var(--color-gold);
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px rgba(196, 162, 97, 0.2);
+    }
+    
+    .bg-pattern {
+      background-color: var(--color-ivory);
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e5e7eb' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    
+    /* レスポンシブ調整 */
+    @media (max-width: 768px) {
+      h1 { font-size: 36px; }
+      h2 { font-size: 28px; }
+      h3 { font-size: 22px; }
+      
+      .section {
+        padding: 3rem 0;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased text-gray-800">
+  <!-- ヘッダー -->
+  <header class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold text-gray-800 hover:opacity-80 transition-opacity">善き贈り物</a>
+      <nav class="hidden md:block">
+        <ul class="flex space-x-8">
+          <li><a href="#services" class="relative pb-1 hover:text-gold-600 transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">サービス</a></li>
+          <li><a href="#case" class="relative pb-1 hover:text-gold-600 transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">成功事例</a></li>
+          <li><a href="#news" class="relative pb-1 hover:text-gold-600 transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">お知らせ</a></li>
+          <li><a href="#contact" class="btn-primary px-6 py-2 hover:bg-gold-dark">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <button class="md:hidden text-gray-700">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ヒーローセクション -->
+  <section class="hero relative pt-24">
+    <div class="container mx-auto px-6 h-full flex items-center">
+      <div class="max-w-3xl">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 fade-in text-white hero-text">鹿児島から想いを届ける</h1>
+        <p class="text-xl md:text-2xl mb-20 text-white fade-in delay-1 hero-text">クラウドファンディング支援と逸品を、<br class="hidden md:block">あなたのもとへ</p>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+      <a href="#services" class="animate-bounce inline-block">
+        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- サービスセクション -->
+  <section id="services" class="py-24 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">サービス内容</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">鹿児島の魅力を最大限に活かした<br class="hidden md:block">クラウドファンディング支援サービス</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- サービス1 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in hover:shadow-xl transition-shadow duration-300">
+          <div class="p-8 text-center">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-amber-50 flex items-center justify-center">
+              <span class="text-3xl">💰</span>
+            </div>
+            <h3 class="text-xl font-bold mb-4">資金調達サポート</h3>
+            <p class="text-gray-600 mb-6">プロジェクトの企画から資金調達まで、専門家が徹底サポート。確実な資金調達を実現します。</p>
+            <p class="text-amber-800 font-medium">資金繰りを円滑に</p>
+          </div>
+        </div>
+        
+        <!-- サービス2 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in hover:shadow-xl transition-shadow duration-300 delay-1">
+          <div class="p-8 text-center">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-amber-50 flex items-center justify-center">
+              <span class="text-3xl">📈</span>
+            </div>
+            <h3 class="text-xl font-bold mb-4">ブランド認知拡大</h3>
+            <p class="text-gray-600 mb-6">SNSやメディアを活用し、プロジェクトの認知度向上をサポート。新規顧客の獲得を後押しします。</p>
+            <p class="text-amber-800 font-medium">ファンを広げる</p>
+          </div>
+        </div>
+        
+        <!-- サービス3 -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in hover:shadow-xl transition-shadow duration-300 delay-2">
+          <div class="p-8 text-center">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-amber-50 flex items-center justify-center">
+              <span class="text-3xl">🛠️</span>
+            </div>
+            <h3 class="text-xl font-bold mb-4">作業代行</h3>
+            <p class="text-gray-600 mb-6">準備からリターン発送まで、面倒な作業を代行。プロジェクト運営の負担を軽減します。</p>
+            <p class="text-amber-800 font-medium">手間ゼロで進行</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-16 text-center">
+        <a href="#contact" class="inline-block bg-gold hover:bg-gold-dark text-white font-medium px-8 py-3 rounded-full transition-colors duration-300">
+          無料相談はこちら
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 成功事例セクション -->
+  <section id="case" class="py-24 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">成功事例</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">これまでにご支援させていただいた<br class="hidden md:block">プロジェクトの一部をご紹介します</p>
+      </div>
+      
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+        <div class="md:flex">
+          <div class="md:w-1/2">
+            <img src="images/yamada-totoya.png" alt="山田食堂の特製丼" class="w-full h-full object-cover">
+          </div>
+          <div class="p-8 md:p-12 md:w-1/2">
+            <span class="inline-block px-4 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium mb-6">飲食店</span>
+            <h3 class="text-2xl md:text-3xl font-bold mb-6">山田食堂 ととやさんの丼の具</h3>
+            <p class="text-gray-600 mb-8">鹿児島県産の新鮮な食材を使ったこだわりの丼。地元の味を全国へお届けするためにクラウドファンディングを実施しました。</p>
+            
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div class="bg-gray-50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-amber-800">1,200<span class="text-lg">人</span></div>
+                <div class="text-sm text-gray-500 mt-1">支援者数</div>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-amber-800">215<span class="text-lg">%</span></div>
+                <div class="text-sm text-gray-500 mt-1">達成率</div>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-amber-800">645<span class="text-lg">万円</span></div>
+                <div class="text-sm text-gray-500 mt-1">支援総額</div>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg text-center">
+                <div class="text-2xl font-bold text-amber-800">45<span class="text-lg">日間</span></div>
+                <div class="text-sm text-gray-500 mt-1">期間</div>
+              </div>
+            </div>
+            
+            <a href="#" class="inline-flex items-center text-amber-800 font-medium hover:underline">
+              プロジェクト詳細を見る
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-16 text-center">
+        <a href="#" class="inline-block bg-gold hover:bg-gold-dark text-white font-medium px-8 py-3 rounded-full transition-colors duration-300">
+          その他の成功事例を見る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ニュースセクション -->
+  <section id="news" class="py-24 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">お知らせ</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">最新の情報やお知らせをお届けします</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <!-- UPDATE_NEWS_START -->
+        <div class="bg-white border-b border-gray-100 py-6 fade-in">
+          <div class="flex flex-col md:flex-row md:items-center">
+            <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.14</span>
+            <div>
+              <h3 class="text-lg font-medium">LINE公式アカウントを開設しました</h3>
+              <p class="text-gray-500 text-sm mt-1">最新情報やお得な情報をいち早くお届けします</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white border-b border-gray-100 py-6 fade-in delay-1">
+          <div class="flex flex-col md:flex-row md:items-center">
+            <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.13</span>
+            <div>
+              <h3 class="text-lg font-medium">クラウドファンディング支援の受付を開始しました</h3>
+              <p class="text-gray-500 text-sm mt-1">無料相談も随時受付中です</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white border-b border-gray-100 py-6 fade-in delay-2">
+          <div class="flex flex-col md:flex-row md:items-center">
+            <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.04.28</span>
+            <div>
+              <h3 class="text-lg font-medium">新商品の準備を進めています</h3>
+              <p class="text-gray-500 text-sm mt-1">近日中に発表予定です</p>
+            </div>
+          </div>
+        </div>
+        <!-- UPDATE_NEWS_END -->
+        
+        <div class="pt-6 text-center">
+          <a href="#" class="inline-block bg-gold hover:bg-gold-dark text-white font-medium px-8 py-3 rounded-full transition-colors duration-300">
+            過去のお知らせを見る
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせセクション -->
+  <section id="contact" class="py-24 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">お問い合わせ</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">お気軽にご相談ください。専門スタッフが丁寧に対応いたします。</p>
+      </div>
+      
+      <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="md:flex">
+          <!-- 会社情報 -->
+          <div class="bg-gold text-white p-8 md:p-12 md:w-2/5">
+            <h3 class="text-2xl font-bold mb-6">お問い合わせ先</h3>
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h4 class="font-medium">住所</h4>
+                  <p class="text-amber-100 mt-1">〒892-0842<br>鹿児島県鹿児島市<br>西千石町11-8 2F</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h4 class="font-medium">電話番号</h4>
+                  <a href="tel:099-000-0000" class="block text-amber-100 hover:text-white mt-1 transition-colors">099-000-0000</a>
+                  <p class="text-amber-100 text-sm mt-1">受付時間: 9:00 - 18:00 (土日祝除く)</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h4 class="font-medium">メールアドレス</h4>
+                  <a href="mailto:info@example.com" class="block text-amber-100 hover:text-white mt-1 transition-colors">info@example.com</a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-12">
+              <h4 class="font-medium mb-4">SNSでフォローする</h4>
+              <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-amber-200 transition-colors" aria-label="Instagram">
+                  <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- お問い合わせフォーム -->
+          <div class="p-8 md:p-12 md:w-3/5">
+            <h3 class="text-2xl font-bold mb-6">メッセージを送る</h3>
+            <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+              <div>
+                <label for="name" class="block text-gray-700 font-medium mb-2">お名前 <span class="text-red-500">*</span></label>
+                <input type="text" id="name" name="name" required 
+                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors">
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="email" class="block text-gray-700 font-medium mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                  <input type="email" id="email" name="email" required 
+                         class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors">
+                </div>
+                
+                <div>
+                  <label for="phone" class="block text-gray-700 font-medium mb-2">電話番号</label>
+                  <input type="tel" id="phone" name="phone" 
+                         class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors">
+                </div>
+              </div>
+              
+              <div>
+                <label for="subject" class="block text-gray-700 font-medium mb-2">件名</label>
+                <select id="subject" name="subject" 
+                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors">
+                  <option value="">選択してください</option>
+                  <option value="consultation">無料相談について</option>
+                  <option value="service">サービスについて</option>
+                  <option value="other">その他</option>
+                </select>
+              </div>
+              
+              <div>
+                <label for="message" class="block text-gray-700 font-medium mb-2">お問い合わせ内容 <span class="text-red-500">*</span></label>
+                <textarea id="message" name="message" rows="5" required 
+                          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-colors"></textarea>
+              </div>
+              
+              <div class="flex items-center">
+                <input type="checkbox" id="privacy" name="privacy" required 
+                       class="h-4 w-4 text-gold focus:ring-gold border-gray-300 rounded">
+                <label for="privacy" class="ml-2 block text-sm text-gray-700">
+                  <a href="#" class="text-gold hover:underline">プライバシーポリシー</a>に同意する
+                </label>
+              </div>
+              
+              <div class="pt-2">
+                <button type="submit" class="w-full py-3 px-6 bg-gold hover:bg-gold-dark text-white font-medium rounded-lg transition-colors duration-300">
+                  送信する
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="bg-clear-navy text-white py-12">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <!-- 会社情報 -->
+        <div class="col-span-1 md:col-span-2">
+          <h3 class="text-xl font-bold mb-4">クラウドファンディング支援サービス</h3>
+          <p class="text-gray-400 mb-6">鹿児島の魅力を全国に発信し、地域活性化に貢献します。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- メニュー -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4">メニュー</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">ホーム</a></li>
+            <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">サービス内容</a></li>
+            <li><a href="#case" class="text-gray-400 hover:text-white transition-colors">成功事例</a></li>
+            <li><a href="#news" class="text-gray-400 hover:text-white transition-colors">お知らせ</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">お問い合わせ</a></li>
+          </ul>
+        </div>
+        
+        <!-- サポート -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4">サポート</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">よくある質問</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">プライバシーポリシー</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">利用規約</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">特定商取引法に基づく表記</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm">© 2025 株式会社サンプル. All Rights Reserved.</p>
+        <div class="mt-4 md:mt-0">
+          <a href="#" class="text-sm text-gray-500 hover:text-white transition-colors">サイトマップ</a>
+          <span class="mx-2 text-gray-600">|</span>
+          <a href="#" class="text-sm text-gray-500 hover:text-white transition-colors">個人情報保護方針</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple fade-in animation on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
+</body>
+</html>
