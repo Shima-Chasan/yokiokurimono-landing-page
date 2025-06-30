@@ -426,16 +426,15 @@
         </div>
         
 
-        <!-- UPDATE_NEWS_END -->
-        
-        <div class="pt-6 text-center">
-          <button id="show-more-news" class="inline-block bg-gold hover:bg-gold-dark text-white font-medium px-8 py-3 rounded-full transition-colors duration-300">
-            過去のお知らせを見る
-          </button>
-        </div>
-        
         <!-- 古いお知らせ（最初は非表示） -->
-        <div id="old-news" class="hidden mt-8">
+        <div id="old-news" class="hidden">
+          <!-- UPDATE_NEWS_END -->
+          
+          <div class="pt-6 text-center">
+            <button id="show-more-news" class="inline-block bg-gold hover:bg-gold-dark text-white font-medium px-8 py-3 rounded-full transition-colors duration-300">
+              過去のお知らせを見る
+            </button>
+          </div>
           <div class="bg-white border-b border-gray-100 py-6 fade-in news-item" data-news-id="3">
             <div class="flex flex-col md:flex-row md:items-center">
               <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.01</span>
@@ -753,8 +752,11 @@
           oldNewsSection.classList.remove('hidden');
           showMoreNewsBtn.textContent = 'お知らせを閉じる';
           
-          // スクロールアニメーション
-          oldNewsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // スクロールアニメーション - 最後のニュースアイテムまでスクロール
+          const lastVisibleNewsItem = document.querySelector('.news-item:last-of-type');
+          if (lastVisibleNewsItem) {
+            lastVisibleNewsItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
           
           // 新しく表示されたニュースアイテムにもクリックイベントを追加
           const newNewsItems = oldNewsSection.querySelectorAll('.news-item');
