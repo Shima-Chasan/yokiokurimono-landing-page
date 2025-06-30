@@ -29,6 +29,65 @@
       --color-primary: #C4A261; /* プライマリーカラーをゴールドに */
     }
     
+    /* モーダル用のスタイル */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal.show {
+      display: block;
+      opacity: 1;
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      max-width: 600px;
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .modal.show .modal-content {
+      transform: translateY(0);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.2s ease;
+    }
+    
+    .close-modal:hover {
+      color: #000;
+    }
+    
+    .news-item {
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    
+    .news-item:hover {
+      background-color: #f9f9f9;
+    }
+    
     body {
       font-family: 'Noto Sans JP', sans-serif;
       color: #333;
@@ -242,9 +301,9 @@
             <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-amber-50 flex items-center justify-center">
               <span class="text-3xl">💰</span>
             </div>
-            <h3 class="text-xl font-bold mb-4">資金調達サポート</h3>
-            <p class="text-gray-600 mb-6">プロジェクトの企画から資金調達まで、専門家が徹底サポート。確実な資金調達を実現します。</p>
-            <p class="text-amber-800 font-medium">資金繰りを円滑に</p>
+            <h3 class="text-xl font-bold mb-4">伴走支援</h3>
+            <p class="text-gray-600 mb-6">企画から二人三脚でサポート。事業所様の「やりたい」を実現するための資金を集めます。</p>
+
           </div>
         </div>
         
@@ -254,9 +313,9 @@
             <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-amber-50 flex items-center justify-center">
               <span class="text-3xl">📈</span>
             </div>
-            <h3 class="text-xl font-bold mb-4">ブランド認知拡大</h3>
-            <p class="text-gray-600 mb-6">SNSやメディアを活用し、プロジェクトの認知度向上をサポート。新規顧客の獲得を後押しします。</p>
-            <p class="text-amber-800 font-medium">ファンを広げる</p>
+            <h3 class="text-xl font-bold mb-4">未来のファンづくり</h3>
+            <p class="text-gray-600 mb-6">商品の魅力を最大限に引き出すPR戦略で、全国にファンを増やします。認知度アップが、新たな販路開拓に繋がります。</p>
+
           </div>
         </div>
         
@@ -266,9 +325,9 @@
             <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-amber-50 flex items-center justify-center">
               <span class="text-3xl">🛠️</span>
             </div>
-            <h3 class="text-xl font-bold mb-4">作業代行</h3>
-            <p class="text-gray-600 mb-6">準備からリターン発送まで、面倒な作業を代行。プロジェクト運営の負担を軽減します。</p>
-            <p class="text-amber-800 font-medium">手間ゼロで進行</p>
+            <h3 class="text-xl font-bold mb-4">運営代行</h3>
+            <p class="text-gray-600 mb-6">プロジェクト運営に関わる面倒な作業を代行します。本来の業務に専念いただきながら、プロジェクトを成功させましょう。</p>
+
           </div>
         </div>
       </div>
@@ -301,15 +360,15 @@
             
             <div class="grid grid-cols-2 gap-4 mb-8">
               <div class="bg-gray-50 p-4 rounded-lg text-center">
-                <div class="text-2xl font-bold text-amber-800">1,200<span class="text-lg">人</span></div>
+                <div class="text-2xl font-bold text-amber-800">192<span class="text-lg">人</span></div>
                 <div class="text-sm text-gray-500 mt-1">支援者数</div>
               </div>
               <div class="bg-gray-50 p-4 rounded-lg text-center">
-                <div class="text-2xl font-bold text-amber-800">215<span class="text-lg">%</span></div>
+                <div class="text-2xl font-bold text-amber-800">1511<span class="text-lg">%</span></div>
                 <div class="text-sm text-gray-500 mt-1">達成率</div>
               </div>
               <div class="bg-gray-50 p-4 rounded-lg text-center">
-                <div class="text-2xl font-bold text-amber-800">645<span class="text-lg">万円</span></div>
+                <div class="text-2xl font-bold text-amber-800">1,511,880<span class="text-lg">円</span></div>
                 <div class="text-sm text-gray-500 mt-1">支援総額</div>
               </div>
               <div class="bg-gray-50 p-4 rounded-lg text-center">
@@ -318,7 +377,7 @@
               </div>
             </div>
             
-            <a href="#" class="inline-flex items-center text-amber-800 font-medium hover:underline">
+            <a href="https://www.makuake.com/project/yokiokurimono/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-amber-800 font-medium hover:underline">
               プロジェクト詳細を見る
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -346,7 +405,7 @@
       
       <div class="max-w-4xl mx-auto">
         <!-- UPDATE_NEWS_START -->
-        <div class="bg-white border-b border-gray-100 py-6 fade-in">
+        <div class="bg-white border-b border-gray-100 py-6 fade-in news-item" data-news-id="1">
           <div class="flex flex-col md:flex-row md:items-center">
             <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.14</span>
             <div>
@@ -356,7 +415,7 @@
           </div>
         </div>
         
-        <div class="bg-white border-b border-gray-100 py-6 fade-in delay-1">
+        <div class="bg-white border-b border-gray-100 py-6 fade-in delay-1 news-item" data-news-id="2">
           <div class="flex flex-col md:flex-row md:items-center">
             <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.13</span>
             <div>
@@ -366,15 +425,7 @@
           </div>
         </div>
         
-        <div class="bg-white border-b border-gray-100 py-6 fade-in delay-2">
-          <div class="flex flex-col md:flex-row md:items-center">
-            <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.04.28</span>
-            <div>
-              <h3 class="text-lg font-medium">新商品の準備を進めています</h3>
-              <p class="text-gray-500 text-sm mt-1">近日中に発表予定です</p>
-            </div>
-          </div>
-        </div>
+
         <!-- UPDATE_NEWS_END -->
         
         <div class="pt-6 text-center">
@@ -409,7 +460,7 @@
                 </div>
                 <div class="ml-4">
                   <h4 class="font-medium">住所</h4>
-                  <p class="text-amber-100 mt-1">〒892-0842<br>鹿児島県鹿児島市<br>西千石町11-8 2F</p>
+                  <p class="text-amber-100 mt-1">〒892-0815<br>鹿児島県鹿児島市易居町1番2号<br>（市役所みなと大通り別館6階）21号室</p>
                 </div>
               </div>
               
@@ -421,31 +472,19 @@
                 </div>
                 <div class="ml-4">
                   <h4 class="font-medium">電話番号</h4>
-                  <a href="tel:099-000-0000" class="block text-amber-100 hover:text-white mt-1 transition-colors">099-000-0000</a>
+                  <a href="tel:090-7391-4029" class="block text-amber-100 hover:text-white mt-1 transition-colors">090-7391-4029</a>
                   <p class="text-amber-100 text-sm mt-1">受付時間: 9:00 - 18:00 (土日祝除く)</p>
                 </div>
               </div>
               
-              <div class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                  </svg>
-                </div>
-                <div class="ml-4">
-                  <h4 class="font-medium">メールアドレス</h4>
-                  <a href="mailto:info@example.com" class="block text-amber-100 hover:text-white mt-1 transition-colors">info@example.com</a>
-                </div>
-              </div>
+
             </div>
             
             <div class="mt-12">
               <h4 class="font-medium mb-4">SNSでフォローする</h4>
               <div class="flex space-x-4">
-                <a href="#" class="text-white hover:text-amber-200 transition-colors" aria-label="Instagram">
-                  <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-                  </svg>
+                <a href="https://www.instagram.com/yokiokurimono" target="_blank" rel="noopener noreferrer" class="text-white hover:text-amber-200 transition-colors" aria-label="Instagram">
+                  <img src="images/Instagram-icon.png" alt="Instagram" class="h-8 w-8" />
                 </a>
               </div>
             </div>
@@ -545,7 +584,7 @@
         <div>
           <h4 class="text-lg font-semibold mb-4">サポート</h4>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">よくある質問</a></li>
+
             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">プライバシーポリシー</a></li>
             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">利用規約</a></li>
             <li><a href="#" class="text-gray-400 hover:text-white transition-colors">特定商取引法に基づく表記</a></li>
@@ -554,15 +593,24 @@
       </div>
       
       <div class="border-t border-gray-400 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-        <p class="text-gray-500 text-sm">© 2025 株式会社サンプル. All Rights Reserved.</p>
+        <p class="text-gray-500 text-sm">© 2025 善き贈り物. All Rights Reserved.</p>
         <div class="mt-4 md:mt-0">
-          <a href="#" class="text-sm text-gray-500 hover:text-white transition-colors">サイトマップ</a>
-          <span class="mx-2 text-gray-600">|</span>
-          <a href="#" class="text-sm text-gray-500 hover:text-white transition-colors">個人情報保護方針</a>
+
+
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- ニュースモーダル -->  
+  <div id="newsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <span class="text-amber-800 font-medium" id="modalDate"></span>
+      <h3 class="text-2xl font-bold mt-2 mb-4" id="modalTitle"></h3>
+      <div id="modalContent" class="prose prose-amber max-w-none"></div>
+    </div>
+  </div>
 
   <script>
     // Simple fade-in animation on scroll
@@ -579,6 +627,75 @@
       
       fadeElements.forEach(element => {
         observer.observe(element);
+      });
+      
+      // ニュースモーダル機能
+      const modal = document.getElementById('newsModal');
+      const closeBtn = modal.querySelector('.close-modal');
+      const modalDate = document.getElementById('modalDate');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalContent = document.getElementById('modalContent');
+      const newsItems = document.querySelectorAll('.news-item');
+      
+      // ニュース詳細データ
+      const newsDetails = {
+        '1': {
+          date: '2025.05.14',
+          title: 'LINE公式アカウントを開設しました',
+          content: `<p>この度、善き贈り物はLINE公式アカウントを開設いたしました。</p>
+
+                   <p>ぜひ友だち追加をして、最新情報をお見逃しなく！</p>`
+        },
+        '2': {
+          date: '2025.05.13',
+          title: 'クラウドファンディング支援の受付を開始しました',
+          content: `<p>鹿児島の魅力を全国に発信するクラウドファンディング支援サービスの受付を開始しました。</p>
+
+                   <p>まずは無料相談からお気軽にどうぞ。鹿児島の魅力を一緒に全国へ発信していきましょう！</p>`
+        }
+      };
+      
+      // モーダルを開く関数
+      function openModal(newsId) {
+        const news = newsDetails[newsId];
+        if (news) {
+          modalDate.textContent = news.date;
+          modalTitle.textContent = news.title;
+          modalContent.innerHTML = news.content;
+          modal.classList.add('show');
+          document.body.style.overflow = 'hidden'; // スクロール防止
+        }
+      }
+      
+      // モーダルを閉じる関数
+      function closeModal() {
+        modal.classList.remove('show');
+        document.body.style.overflow = ''; // スクロール再開
+      }
+      
+      // ニュースアイテムにクリックイベントを追加
+      newsItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const newsId = this.getAttribute('data-news-id');
+          openModal(newsId);
+        });
+      });
+      
+      // 閉じるボタンのイベント
+      closeBtn.addEventListener('click', closeModal);
+      
+      // モーダル外クリックで閉じる
+      window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+      
+      // ESCキーでモーダルを閉じる
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.classList.contains('show')) {
+          closeModal();
+        }
       });
     });
   </script>
