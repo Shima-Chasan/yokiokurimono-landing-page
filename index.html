@@ -418,8 +418,10 @@
         <p class="text-gray-600 max-w-2xl mx-auto">最新の情報やお知らせをお届けします</p>
       </div>
       
-      <div class="max-w-4xl mx-auto">
-        <!-- UPDATE_NEWS_START -->
+      <div id="news-container" class="max-w-4xl mx-auto">
+        <!-- CMSからのお知らせがここに挿入されます -->
+        
+        <!-- 既存のお知らせ -->
         <div class="bg-white border-b border-gray-100 py-6 fade-in news-item" data-news-id="1">
           <div class="flex flex-col md:flex-row md:items-center">
             <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.14</span>
@@ -440,10 +442,8 @@
           </div>
         </div>
         
-
         <!-- 古いお知らせ（最初は非表示） -->
         <div id="old-news" class="hidden">
-          <!-- UPDATE_NEWS_END -->
           
           <div class="pt-6 text-center">
             <button id="show-more-news" class="inline-block bg-gold hover:bg-gold-dark text-white font-medium px-8 py-3 rounded-full transition-colors duration-300">
@@ -815,5 +815,8 @@
       });
     }
   </script>
+  
+  <!-- お知らせ読み込み用スクリプト -->
+  <script src="/js/news-loader.js"></script>
 </body>
 </html>
