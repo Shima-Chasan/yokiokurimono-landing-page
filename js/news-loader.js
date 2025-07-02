@@ -86,33 +86,164 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
   }
   
-  // デモ用にサンプルデータを取得する関数
+  // CMSの記事データを取得する関数
   async function getNewsData() {
-    // 実際の環境では、APIからデータを取得する
-    // ここではデモ用にサンプルデータを返す
-    return [
-      {
-        title: "新サービス開始のお知らせ",
-        date: "2025.07.01",
-        summary: "この度、善き贈り物では新たなクラウドファンディング支援サービスを開始いたしました。",
-        id: "cms-1",
-        content: `
-          <h2>新サービス開始のお知らせ</h2>
-          
-          <p>この度、善き贈り物では新たなクラウドファンディング支援サービスを開始いたしました。</p>
-          
-          <h3>主な特徴</h3>
-          
-          <ul>
-            <li>専門スタッフによる伴走支援</li>
-            <li>SNSを活用した未来のファンづくり</li>
-            <li>運営代行サービス</li>
-          </ul>
-          
-          <p>鹿児島の魅力を全国に発信するお手伝いをさせていただきます。詳しくはお問い合わせください。</p>
-        `
+    try {
+      // _newsディレクトリ内のファイル一覧を取得
+      const response = await fetch('/_news/');
+      if (!response.ok) {
+        throw new Error('ディレクトリ一覧の取得に失敗しました');
       }
-    ];
+      
+      // HTMLテキストからファイル名を抽出
+      const html = await response.text();
+      const fileRegex = /href="([^"]+\.md)"/g;
+      let match;
+      const files = [];
+      while ((match = fileRegex.exec(html)) !== null) {
+        files.push(match[1]);
+      }
+      
+      // 各ファイルの内容を取得
+      const newsItems = await Promise.all(
+        files.map(async (file) => {
+          try {
+            const fileResponse = await fetch(`/_news/${file}`);
+            if (!fileResponse.ok) return null;
+            
+            const content = await fileResponse.text();
+            return parseMarkdownNews(content, file);
+          } catch (error) {
+            console.error(`ファイルの読み込みに失敗しました: ${file}`, error);
+            return null;
+          }
+        })
+      );
+      
+      // nullを除外して有効なデータのみ返す
+      return newsItems.filter(item => item !== null);
+      
+    } catch (error) {
+      console.error('ニュースデータの取得に失敗しました:', error);
+      
+      // エラー時はサンプルデータを返す
+      return [
+        {
+          title: "新サービス開始のお知らせ",
+          date: "2025.07.01",
+          summary: "この度、善き贈り物では新たなクラウドファンディング支援サービスを開始いたしました。",
+          id: "cms-1",
+          content: `
+            <h2>新サービス開始のお知らせ</h2>
+            
+            <p>この度、善き贈り物では新たなクラウドファンディング支援サービスを開始いたしました。</p>
+            
+            <h3>主な特徴</h3>
+            
+            <ul>
+              <li>専門スタッフによる伴走支援</li>
+              <li>SNSを活用した未来のファンづくり</li>
+              <li>運営代行サービス</li>
+            </ul>
+            
+            <p>鹿児島の魅力を全国に発信するお手伝いをさせていただきます。詳しくはお問い合わせください。</p>
+          `
+        }
+      ];
+    }
+  }
+  
+  // Markdown形式のニュース記事をパースする関数
+  function parseMarkdownNews(markdown, filename) {
+    try {
+      // ファイル名からIDを生成
+      const id = filename.replace(/\.md$/, '');
+      
+      // Front Matterを抽出
+      const frontMatterRegex = /---\n([\s\S]*?)\n---\n([\s\S]*)/;
+      const match = markdown.match(frontMatterRegex);
+      
+      if (!match) {
+        console.error('正しい形式のFront Matterが見つかりません:', filename);
+        return null;
+      }
+      
+      const frontMatter = match[1];
+      const content = match[2];
+      
+      // Front Matterからタイトルと日付を抽出
+      const titleMatch = frontMatter.match(/title:\s*(.+)/);
+      const dateMatch = frontMatter.match(/date:\s*(.+)/);
+      
+      if (!titleMatch || !dateMatch) {
+        console.error('タイトルまたは日付が見つかりません:', filename);
+        return null;
+      }
+      
+      const title = titleMatch[1].trim();
+      const dateStr = dateMatch[1].trim();
+      
+      // 日付をフォーマット変換
+      const date = formatDate(dateStr);
+      
+      // 要約を生成（最初の段落から取得）
+      const summaryMatch = content.match(/\n([^\n#].+?)\n/);
+      const summary = summaryMatch ? summaryMatch[1].trim() : '詳細はクリックして確認してください。';
+      
+      // MarkdownをHTMLに変換
+      const htmlContent = markdownToHtml(content);
+      
+      return {
+        title,
+        date,
+        summary,
+        id,
+        content: htmlContent
+      };
+    } catch (error) {
+      console.error('マークダウンのパースに失敗しました:', error);
+      return null;
+    }
+  }
+  
+  // 日付をフォーマットする関数
+  function formatDate(dateStr) {
+    try {
+      const date = new Date(dateStr);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}.${month}.${day}`;
+    } catch (error) {
+      console.error('日付のフォーマットに失敗しました:', dateStr);
+      return dateStr; // 元の形式を返す
+    }
+  }
+  
+  // 簡易的なMarkdownをHTMLに変換する関数
+  function markdownToHtml(markdown) {
+    let html = markdown
+      // 見出し変換
+      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      
+      // リスト変換
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      
+      // リストをulタグで囲む
+      .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+      
+      // 段落変換（見出しやリスト以外のテキスト行）
+      .replace(/^([^<\n].+)$/gm, '<p>$1</p>')
+      
+      // リンク変換
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-amber-800 hover:underline">$1</a>')
+      
+      // 空行を除去
+      .replace(/<p>\s*<\/p>/g, '');
+    
+    return html;
   }
   
   // 新しい記事があるかチェックする関数
