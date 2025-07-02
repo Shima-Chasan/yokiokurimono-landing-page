@@ -20,6 +20,8 @@
     }
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     :root {
       --color-navy: #1B2838;
@@ -799,6 +801,19 @@
         }
       });
     });
+  </script>
+  
+  <!-- Netlify Identity リダイレクト処理 -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
   </script>
 </body>
 </html>

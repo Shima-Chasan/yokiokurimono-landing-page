@@ -1,0 +1,70 @@
+backend:
+  name: github
+  repo: Shima-Chasan/yokiokurimono-landing-page
+  branch: main
+  auth_type: implicit
+  app_id: # GitHubのOAuth App IDを設定する必要があります
+
+# Netlify Identityを使用する場合は以下の設定を使用
+# backend:
+#   name: git-gateway
+#   branch: main
+
+# 画像やその他のメディアファイルのアップロード先
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# 日本語対応
+locale: 'ja'
+
+# コレクション（編集可能なコンテンツタイプ）の定義
+collections:
+  - name: "pages"
+    label: "ページ"
+    files:
+      - name: "home"
+        label: "トップページ"
+        file: "index.html"
+        editor:
+          preview: true
+        fields:
+          - {label: "ヒーロータイトル", name: "hero_title", widget: "string"}
+          - {label: "ヒーロー説明文", name: "hero_description", widget: "text"}
+          - label: "サービス"
+            name: "services"
+            widget: "list"
+            fields:
+              - {label: "アイコン", name: "icon", widget: "string"}
+              - {label: "タイトル", name: "title", widget: "string"}
+              - {label: "説明", name: "description", widget: "text"}
+          - label: "成功事例"
+            name: "case_studies"
+            widget: "list"
+            fields:
+              - {label: "タイトル", name: "title", widget: "string"}
+              - {label: "カテゴリ", name: "category", widget: "string"}
+              - {label: "説明", name: "description", widget: "text"}
+              - {label: "画像", name: "image", widget: "image"}
+              - {label: "支援者数", name: "supporters", widget: "number"}
+              - {label: "達成率", name: "achievement_rate", widget: "number"}
+              - {label: "支援総額", name: "total_amount", widget: "string"}
+              - {label: "期間", name: "period", widget: "string"}
+      - name: "privacy"
+        label: "プライバシーポリシー"
+        file: "privacy-policy.html"
+        editor:
+          preview: true
+        fields:
+          - {label: "タイトル", name: "title", widget: "string"}
+          - {label: "内容", name: "content", widget: "markdown"}
+  
+  - name: "news"
+    label: "お知らせ"
+    folder: "_news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "タイトル", name: "title", widget: "string"}
+      - {label: "公開日", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "カテゴリ", name: "category", widget: "select", options: ["お知らせ", "イベント", "メディア掲載"]}
+      - {label: "内容", name: "body", widget: "markdown"}

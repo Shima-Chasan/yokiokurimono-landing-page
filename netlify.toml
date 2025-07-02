@@ -3,3 +3,14 @@
   
 [dev]
   framework = "#static"
+
+# Decap CMS用の設定
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"

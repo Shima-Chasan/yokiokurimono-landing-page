@@ -18,6 +18,13 @@ dist/
 build/
 out/
 
+# CMS関連
+.netlify/
+# ローカルCMSのテスト用ファイル
+local_backend/
+# メディアアップロードの一時ファイル
+.tmp/
+
 # Local development
 .env.local
 .env.development.local
