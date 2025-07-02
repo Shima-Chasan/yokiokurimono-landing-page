@@ -38,6 +38,20 @@
   margin-bottom: 0.25em;
 }
 
+/* リンクのスタイル */
+.prose a {
+  color: #92400e; /* amber-800 */
+  text-decoration: underline;
+  text-decoration-color: #d97706; /* amber-600 */
+  text-underline-offset: 2px;
+  transition: all 0.2s ease;
+}
+
+.prose a:hover {
+  color: #78350f; /* amber-900 */
+  text-decoration-color: currentColor;
+}
+
 /* モーダルのアニメーション */
 #news-modal {
   opacity: 0;

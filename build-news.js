@@ -3,6 +3,15 @@ const path = require('path');
 const matter = require('gray-matter');
 const marked = require('marked');
 
+// markedの設定をカスタマイズ
+marked.setOptions({
+  breaks: true, // 改行をbrタグに変換
+  gfm: true,    // GitHub Flavored Markdownを有効化
+  headerIds: true,
+  mangle: false,
+  sanitize: false // HTMLタグを許可（リンクなどのHTMLを有効にするため）
+});
+
 // _newsディレクトリのパス
 const newsDir = path.join(__dirname, '_news');
 // 出力先のJSONファイルパス
@@ -30,6 +39,9 @@ function buildNewsData() {
       
       // Markdownをパースしてコンテンツを生成
       const htmlContent = marked.parse(content);
+      
+      // リンクが正しく機能するようにする処理
+      // (markedの設定だけでは不十分な場合の追加処理)
       
       // 日付をフォーマット
       const date = new Date(data.date);
