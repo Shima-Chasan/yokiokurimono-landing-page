@@ -2,6 +2,8 @@
 backend:
   name: git-gateway
   branch: main
+  identity_url: "https://yokiokurimono-kagoshima-new.windsurf.build/.netlify/identity"
+  gateway_url: "https://yokiokurimono-kagoshima-new.windsurf.build/.netlify/git/github"
 
 # GitHubバックエンドを使用する場合は以下の設定を使用
 # backend:

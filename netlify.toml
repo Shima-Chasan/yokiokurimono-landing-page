@@ -10,6 +10,24 @@
   to = "/admin/index.html"
   status = 200
 
+# Netlify Identity用の設定
+[[redirects]]
+  from = "/.netlify/identity/*"
+  to = "https://api.netlify.com/.netlify/identity/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+
+# Git Gateway用の設定
+[[redirects]]
+  from = "/.netlify/git/*"
+  to = "https://api.netlify.com/.netlify/git/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+
 [[headers]]
   for = "/*"
     [headers.values]

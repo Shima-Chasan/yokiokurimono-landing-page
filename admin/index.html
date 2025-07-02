@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>善き贈り物 - コンテンツ管理</title>
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <!-- Decap CMS本体の読み込み -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <!-- Tailwind CSSの読み込み（プレビュー用） -->
@@ -12,5 +14,21 @@
 <body>
   <!-- Decap CMSのルート要素 -->
   <div id="nc-root"></div>
+
+  <!-- Netlify Identity初期化スクリプト -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          // ログインボタンを表示
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+          // ログインダイアログを開く
+          window.netlifyIdentity.open();
+        }
+      });
+    }
+  </script>
 </body>
 </html>
