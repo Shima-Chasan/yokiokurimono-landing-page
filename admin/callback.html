@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>認証コールバック - 善き贈り物</title>
+</head>
+<body>
+  <script>
+    // GitHubからのOAuthコールバックを処理
+    const hash = window.location.hash.substr(1);
+    const params = {};
+    
+    hash.split('&').map(param => {
+      const [key, value] = param.split('=');
+      params[key] = value;
+    });
+    
+    // 認証情報をローカルストレージに保存
+    if (params.token_type && params.access_token) {
+      localStorage.setItem('netlify-cms-user', JSON.stringify({
+        token_type: params.token_type,
+        access_token: params.access_token
+      }));
+    }
+    
+    // 管理画面にリダイレクト
+    window.location.href = '/admin/';
+  </script>
+</body>
+</html>

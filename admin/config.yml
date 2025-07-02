@@ -1,17 +1,17 @@
-# Netlify Identityを使用する設定
+# GitHubバックエンドを使用する設定
 backend:
-  name: git-gateway
+  name: github
+  repo: Shima-Chasan/yokiokurimono-landing-page
   branch: main
-  identity_url: "https://yokiokurimono-kagoshima-new.windsurf.build/.netlify/identity"
-  gateway_url: "https://yokiokurimono-kagoshima-new.windsurf.build/.netlify/git/github"
+  base_url: https://yokiokurimono-kagoshima-new.windsurf.build
+  auth_endpoint: auth
 
-# GitHubバックエンドを使用する場合は以下の設定を使用
+# Netlify Identityを使用する場合は以下の設定を使用
 # backend:
-#   name: github
-#   repo: Shima-Chasan/yokiokurimono-landing-page
+#   name: git-gateway
 #   branch: main
-#   auth_type: implicit
-#   app_id: # GitHubのOAuth App IDを設定する必要があります
+#   identity_url: "https://yokiokurimono-kagoshima-new.windsurf.build/.netlify/identity"
+#   gateway_url: "https://yokiokurimono-kagoshima-new.windsurf.build/.netlify/git/github"
 
 # 画像やその他のメディアファイルのアップロード先
 media_folder: "images/uploads"
