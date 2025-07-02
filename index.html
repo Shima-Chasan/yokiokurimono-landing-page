@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>鹿児島から想いを届ける - クラウドファンディング支援</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/modal.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -772,5 +775,25 @@
   
   <!-- お知らせ読み込み用スクリプト -->
   <script src="/js/news-loader.js"></script>
+  
+  <!-- お知らせ詳細モーダル -->
+  <div id="news-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 id="modal-title" class="text-2xl font-bold text-gray-800"></h3>
+          <button id="close-modal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="mb-4">
+          <span id="modal-date" class="text-amber-800 font-medium"></span>
+        </div>
+        <div id="modal-content" class="prose max-w-none"></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
