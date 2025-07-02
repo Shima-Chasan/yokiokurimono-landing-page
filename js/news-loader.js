@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const modalDate = document.querySelector('#modal-date');
   const modalContent = document.querySelector('#modal-content');
   const closeModalBtn = document.querySelector('#close-modal');
+  const loadMoreContainer = document.querySelector('#load-more-container');
+  const loadMoreButton = document.querySelector('#load-more-button');
   
   // 前回の記事数を記録する変数
   let previousNewsCount = 0;
@@ -14,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
   let lastDisplayedNewsIds = [];
   // 記事データを保持する変数
   let newsData = [];
+  // 現在表示している記事の数
+  let currentDisplayCount = 3;
+  // 1ページあたりの記事数
+  const newsPerPage = 3;
   
   if (!newsContainer) return;
   
@@ -296,7 +302,19 @@ document.addEventListener('DOMContentLoaded', function() {
         return dateB - dateA; // 降順（新しい順）
       });
       
-      sortedNews.forEach(news => {
+      // 表示する記事数を制限
+      const newsToDisplay = sortedNews.slice(0, currentDisplayCount);
+      
+      // 「過去のお知らせを見る」ボタンの表示制御
+      if (loadMoreContainer) {
+        if (sortedNews.length > currentDisplayCount) {
+          loadMoreContainer.style.display = 'block';
+        } else {
+          loadMoreContainer.style.display = 'none';
+        }
+      }
+      
+      newsToDisplay.forEach(news => {
         newsHtml += `
           <div class="bg-white border-b border-gray-100 py-6 fade-in news-item cursor-pointer hover:bg-gray-50 transition-colors duration-200" data-news-id="${news.id}">
             <div class="flex flex-col md:flex-row md:items-center">
@@ -380,6 +398,26 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('お知らせの更新をチェックしています...');
       await fetchNews();
     }, AUTO_REFRESH_INTERVAL);
+  }
+  
+  // 「過去のお知らせを見る」ボタンのクリックイベントを設定
+  if (loadMoreButton) {
+    loadMoreButton.addEventListener('click', function() {
+      // 表示件数を増やす
+      currentDisplayCount += newsPerPage;
+      
+      // 記事を再表示
+      displayCmsNews(newsData);
+      
+      // スクロールアニメーション（新しく表示された最初の記事へ）
+      const newsItems = document.querySelectorAll('.news-item');
+      if (newsItems.length > 0 && newsItems.length >= (currentDisplayCount - newsPerPage)) {
+        const targetElement = newsItems[currentDisplayCount - newsPerPage];
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
   }
   
   // 自動更新を開始
