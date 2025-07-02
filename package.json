@@ -1,0 +1,26 @@
+{
+  "name": "yokiokurimono-landing-page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build-news.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build-news.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shima-Chasan/kagoshima-landing-page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Shima-Chasan/kagoshima-landing-page/issues"
+  },
+  "homepage": "https://github.com/Shima-Chasan/kagoshima-landing-page#readme",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^16.0.0"
+  }
+}

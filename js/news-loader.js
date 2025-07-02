@@ -89,39 +89,18 @@ document.addEventListener('DOMContentLoaded', function() {
   // CMSの記事データを取得する関数
   async function getNewsData() {
     try {
-      // _newsディレクトリ内のファイル一覧を取得
-      const response = await fetch('/_news/');
+      console.log('ニュースデータを取得中...');
+      
+      // 生成されたJSONファイルからニュース記事を読み込む
+      const response = await fetch('/news-data.json');
+      
       if (!response.ok) {
-        throw new Error('ディレクトリ一覧の取得に失敗しました');
+        throw new Error('JSONファイルの読み込みに失敗しました');
       }
       
-      // HTMLテキストからファイル名を抽出
-      const html = await response.text();
-      const fileRegex = /href="([^"]+\.md)"/g;
-      let match;
-      const files = [];
-      while ((match = fileRegex.exec(html)) !== null) {
-        files.push(match[1]);
-      }
-      
-      // 各ファイルの内容を取得
-      const newsItems = await Promise.all(
-        files.map(async (file) => {
-          try {
-            const fileResponse = await fetch(`/_news/${file}`);
-            if (!fileResponse.ok) return null;
-            
-            const content = await fileResponse.text();
-            return parseMarkdownNews(content, file);
-          } catch (error) {
-            console.error(`ファイルの読み込みに失敗しました: ${file}`, error);
-            return null;
-          }
-        })
-      );
-      
-      // nullを除外して有効なデータのみ返す
-      return newsItems.filter(item => item !== null);
+      const newsItems = await response.json();
+      console.log('ニュースデータを取得しました:', newsItems.length, '件');
+      return newsItems;
       
     } catch (error) {
       console.error('ニュースデータの取得に失敗しました:', error);
