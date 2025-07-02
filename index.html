@@ -420,55 +420,9 @@
       
       <div id="news-container" class="max-w-4xl mx-auto">
         <!-- CMSからのお知らせがここに挿入されます -->
-        
-        <!-- 既存のお知らせ -->
-        <div class="bg-white border-b border-gray-100 py-6 fade-in news-item" data-news-id="1">
-          <div class="flex flex-col md:flex-row md:items-center">
-            <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.14</span>
-            <div>
-              <h3 class="text-lg font-medium">LINE公式アカウントを開設しました</h3>
-              <p class="text-gray-500 text-sm mt-1">最新情報やお得な情報をいち早くお届けします</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="bg-white border-b border-gray-100 py-6 fade-in delay-1 news-item" data-news-id="2">
-          <div class="flex flex-col md:flex-row md:items-center">
-            <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.13</span>
-            <div>
-              <h3 class="text-lg font-medium">クラウドファンディング支援の受付を開始しました</h3>
-              <p class="text-gray-500 text-sm mt-1">無料相談も随時受付中です</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 古いお知らせ（最初は非表示） -->
-        <div id="old-news" class="hidden">
-          
-          <div class="pt-6 text-center">
-            <button id="show-more-news" class="inline-block bg-gold hover:bg-gold-dark text-white font-medium px-8 py-3 rounded-full transition-colors duration-300">
-              過去のお知らせを見る
-            </button>
-          </div>
-          <div class="bg-white border-b border-gray-100 py-6 fade-in news-item" data-news-id="3">
-            <div class="flex flex-col md:flex-row md:items-center">
-              <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.05.01</span>
-              <div>
-                <h3 class="text-lg font-medium">サイトを公開しました</h3>
-                <p class="text-gray-500 text-sm mt-1">善き贈り物の公式サイトを公開しました</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="bg-white border-b border-gray-100 py-6 fade-in news-item" data-news-id="4">
-            <div class="flex flex-col md:flex-row md:items-center">
-              <span class="text-amber-800 font-medium mb-2 md:mb-0 md:w-32">2025.04.20</span>
-              <div>
-                <h3 class="text-lg font-medium">クラウドファンディング支援サービスの準備を開始</h3>
-                <p class="text-gray-500 text-sm mt-1">鹿児島の魅力を全国に発信するサービスの準備を始めました</p>
-              </div>
-            </div>
-          </div>
+        <!-- お知らせがない場合の表示 -->
+        <div id="no-news-message" class="text-center py-8 text-gray-500">
+          <p>現在お知らせはありません</p>
         </div>
       </div>
     </div>
