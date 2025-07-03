@@ -746,57 +746,69 @@
         }
       });
       
-      // モバイルメニューの表示切り替え
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      let isMenuOpen = false;
+      // モバイルメニューの初期化
+      function initMobileMenu() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (!mobileMenuButton || !mobileMenu) return;
+        
+        let isMenuOpen = false;
+        const menuIcon = mobileMenuButton.querySelector('svg');
+        const menuLinks = mobileMenu.querySelectorAll('a');
 
-      // メニューアイコンの初期化
-      const menuIcon = mobileMenuButton.querySelector('svg');
-      const menuLinks = mobileMenu.querySelectorAll('a');
-
-      // メニューを閉じる関数
-      function closeMenu() {
-        mobileMenu.classList.add('hidden');
-        menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
-        isMenuOpen = false;
-      }
-
-      // メニューを開く関数
-      function openMenu() {
-        mobileMenu.classList.remove('hidden');
-        menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-        isMenuOpen = true;
-      }
-
-      // メニューボタンのクリックイベント
-      mobileMenuButton.addEventListener('click', function(e) {
-        e.stopPropagation(); // イベントの伝播を防ぐ
-        if (isMenuOpen) {
-          closeMenu();
-        } else {
-          openMenu();
+        // メニューを閉じる関数
+        function closeMenu() {
+          if (!mobileMenu || !menuIcon) return;
+          mobileMenu.classList.add('hidden');
+          menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
+          isMenuOpen = false;
         }
-      });
+
+        // メニューを開く関数
+        function openMenu() {
+          if (!mobileMenu || !menuIcon) return;
+          mobileMenu.classList.remove('hidden');
+          menuIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+          isMenuOpen = true;
+        }
+
+        // メニューボタンのクリックイベント
+        mobileMenuButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (isMenuOpen) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+        
+        // メニュー内のリンクがクリックされたらメニューを閉じる
+        menuLinks.forEach(link => {
+          link.addEventListener('click', closeMenu);
+        });
+
+        // メニュー外をクリックしたらメニューを閉じる
+        document.addEventListener('click', function(e) {
+          if (isMenuOpen && !mobileMenu.contains(e.target) && e.target !== mobileMenuButton) {
+            closeMenu();
+          }
+        });
+
+        // ウィンドウのリサイズ時にメニューを閉じる
+        window.addEventListener('resize', function() {
+          if (window.innerWidth >= 768) {
+            closeMenu();
+          }
+        });
+      }
       
-      // メニュー内のリンクがクリックされたらメニューを閉じる
-      menuLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
-      });
-
-      // メニュー外をクリックしたらメニューを閉じる
-      document.addEventListener('click', function(e) {
-        if (isMenuOpen && !mobileMenu.contains(e.target) && e.target !== mobileMenuButton) {
-          closeMenu();
-        }
-      });
-
-      // ウィンドウのリサイズ時にメニューを閉じる
-      window.addEventListener('resize', function() {
-        if (window.innerWidth >= 768) {
-          closeMenu();
-        }
-      });
+      // ページ読み込み後にメニューを初期化
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
+      } else {
+        initMobileMenu();
+      }
     });
   </script>
   
